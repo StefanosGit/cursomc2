@@ -5,27 +5,26 @@ import java.util.stream.Stream;
 import lombok.Getter;
 
 @Getter
-public enum TipoCliente {
-
-	PESSOA_FISICA(1, "Pessoa Física"),
-	PESSOA_JURIDICA(2, "Pessoa Jurídica");
+public enum EstadoPagamento {
+	
+	PENDENTE(1 , "Pendente"),
+	QUITADO(2,"Quitado"),
+	CANCELADO(3,"Cancelado");
+	
 	
 	private int cod;
 	private String descricao;
 	
-	private TipoCliente(int cod, String descricao) {
+	private EstadoPagamento(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
 
-	
-	public static TipoCliente toEnum(Integer cod) {
-		return Stream.of(TipoCliente.values())
+	public static EstadoPagamento toEnum(Integer cod) {
+		return Stream.of(EstadoPagamento.values())
 				.filter(tipo -> cod.equals(tipo.getCod())).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("Código Inválido. Id: " + cod));
 	}
-	
-	
-	
-	
+
+
 }
