@@ -2,7 +2,10 @@ package com.srp.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -44,6 +48,16 @@ public class Produto implements Serializable{
 			joinColumns = @JoinColumn(name="produto_id"),
 			inverseJoinColumns = @JoinColumn(name="categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
+	
+	public List<Pedido> getPedidos(){
+		
+		return itens.stream().map(ItemPedido::getPedido).collect(Collectors.toList());
+		
+	}
+	
 	
 	
 	public Produto(Integer id, String nome, Double preco) {
