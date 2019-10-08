@@ -18,4 +18,12 @@ public class CategoriaService {
 				+ " encontrado! Id: " + id + ", Tipo " + Categoria.class.getName()));
 	}
 
+	public Categoria inclui(Categoria categoria) {
+		return repo.save(categoria);
+	}
+
+	public Categoria atualizar(Categoria categoria) {
+		return repo.save(categoria);
+	}
+
 }

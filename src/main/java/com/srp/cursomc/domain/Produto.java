@@ -16,13 +16,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Getter @Setter 
 @NoArgsConstructor
 @Entity
@@ -43,7 +45,6 @@ public class Produto implements Serializable{
 	 * com os ids do relacionamento. abaixo estamos mapeando o nome da tabela intermediária
 	 * PRODUTO_CATEGORIA e o nome dos campos desta produto_id e categoria_id
 	 */
-	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA",
 			joinColumns = @JoinColumn(name="produto_id"),

@@ -10,13 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Getter @Setter 
 @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -35,7 +37,7 @@ public class Categoria implements Serializable{
 	 * Como esse mapeamento já está feito na tabela Produto, não há necessidade de repeti-lo,
 	 * indica-se apenas onde o mesmo foi feito
 	 */
-	@JsonManagedReference
+
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
